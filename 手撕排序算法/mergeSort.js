@@ -32,7 +32,7 @@ console.log(mergeSort([11, 2, 9, 0, 6, 7, 3]));
 let mergeSort2 = function(arr) {
   for (let size = 1; size < arr.length; size = size * 2) {
     for (let i = 0; i < arr.length; i = i + size + size) {
-      merge(arr.slice(i, i + sizesize), arr.slice(i + size, i + size + size));
+      merge(arr.slice(i, i + sizesize), arr.slice(i + size, i + size + size)); // slice是创建新数组，不能改变原数组，得传索引
     }
   }
 };

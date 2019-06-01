@@ -29,7 +29,32 @@ let quick0 = function(arr, left, right) {
   quick0(arr, left, index);
   quick0(arr, index + 1, right);
 };
-console.log(this.quickSort([11, 2, 9, 0, 6, 7, 3]));
+console.log(this.quickSort([11, 2, 9, 0, 2, 7, 3]));
+
+this.quickSort3 = function(arr) {
+  quick0(arr, 0, arr.length);
+  return arr;
+};
+
+let quick3 = function(arr, left, right) {
+  if (right - left <= 1) return;
+  let base = arr[left];
+  let indexL = left;
+  let indexR = right;
+  let i = left + 1;
+  while (i < indexR) {
+    if (arr[i] < base) {
+      swap(arr, indexL++, i++);
+    } else if (arr[i] > base) {
+      swap(arr, i, --indexR);
+    } else {
+      indexL++;
+    }
+  }
+  quick3(arr, left, indexL);
+  quick3(arr, indexR + 1, right);
+};
+console.log(this.quickSort3([11, 2, 9, 0, 2, 7, 3]));
 
 let quick = function(arr) {
   if (arr.length <= 1) return arr;
@@ -41,7 +66,6 @@ let quick = function(arr) {
       swap(arr, i, ++index);
     }
   }
-
   let left = [],
     right = [];
   left = quick(arr.slice(1, index + 1));
