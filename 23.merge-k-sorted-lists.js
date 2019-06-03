@@ -38,32 +38,40 @@
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
-var mergeKLists = function (lists) {
-  let len = lists.length - 1;
+// var mergeKLists = function (lists) {
+//   let len = lists.length - 1;
 
-  while (len > 0) {
-    let list = {
-      val: -1,
-      next: null
-    };
-    let head = list;
-    while (lists[len] && lists[len - 1]) {
-      if (lists[len].val <= lists[len - 1].val) {
-        head.next = lists[len];
-        head = head.next;
-        lists[len] = lists[len].next;
-      } else {
-        head.next = lists[len - 1];
-        head = head.next;
-        lists[len - 1] = lists[len - 1].next;
-      }
-    }
-    head.next = lists[len] || lists[len - 1];
-    lists[len - 1] = list.next;
-    len = len - 1;
+//   while (len > 0) {
+//     let list = {
+//       val: -1,
+//       next: null
+//     };
+//     let head = list;
+//     while (lists[len] && lists[len - 1]) {
+//       if (lists[len].val <= lists[len - 1].val) {
+//         head.next = lists[len];
+//         head = head.next;
+//         lists[len] = lists[len].next;
+//       } else {
+//         head.next = lists[len - 1];
+//         head = head.next;
+//         lists[len - 1] = lists[len - 1].next;
+//       }
+//     }
+//     head.next = lists[len] || lists[len - 1];
+//     lists[len - 1] = list.next;
+//     len = len - 1;
+//   }
+
+//   return lists[0] || null;
+
+
+// };
+
+function(str){
+  let arr;
+  let currentIndex = 0,nextIndex = 0,sign=1;
+  while(stack.length){
+    
   }
-
-  return lists[0] || null;
-
-
-};
+}
