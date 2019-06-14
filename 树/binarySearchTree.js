@@ -58,6 +58,7 @@ class BinaryTree {
     return this.root;
   }
 
+  //中序遍历
   inOrderTraverse(fn) {
     let inOrderTraverseNode = (node, callback) => {
       if (node !== null) {
@@ -68,7 +69,7 @@ class BinaryTree {
     };
     inOrderTraverseNode(this.root, fn);
   }
-
+  // 先序遍历
   preOrderTraverse(fn) {
     let preOrderTraverseNode = (node, callback) => {
       if (node !== null) {
@@ -79,7 +80,7 @@ class BinaryTree {
     };
     preOrderTraverseNode(this.root, fn);
   }
-
+  // 后序遍历
   postOrderTraverse(fn) {
     let postOrderTraverseNode = (node, callback) => {
       if (node !== null) {
@@ -90,7 +91,7 @@ class BinaryTree {
     };
     postOrderTraverseNode(this.root, fn);
   }
-
+  // 最小值
   min() {
     let node = this.root;
     if (node) {
@@ -100,7 +101,7 @@ class BinaryTree {
       return node.key;
     }
   }
-
+  // 最大值
   max() {
     let node = this.root;
     if (node) {
@@ -110,7 +111,7 @@ class BinaryTree {
       return node.key;
     }
   }
-
+  // 找到特定的值
   search(key) {
     let searchNode = (node, key) => {
       if (node === null) {
@@ -126,7 +127,7 @@ class BinaryTree {
     };
     return searchNode(this.root, key);
   }
-
+  // 移除节点
   remove(key) {
     let findMinNode = (node, key) => {
       let node = node || this.root;
@@ -150,10 +151,12 @@ class BinaryTree {
         node.right = removeNode(node.right, key);
         return node;
       } else {
+        // 没有子节点，直接删除
         if (node.left === null && node.right === null) {
           node = null;
           return node;
         }
+        // 有一个子节点，直接替换
         if (node.left === null) {
           node = node.right;
           return node;
@@ -161,7 +164,7 @@ class BinaryTree {
           node = node.left;
           return node;
         }
-
+        // 有两个子节点，将右边最小的替换或者将左边最大的替换
         if (node.left !== null && node.right !== null) {
           let aux = findMinNode(node.right);
           node.key = aux;

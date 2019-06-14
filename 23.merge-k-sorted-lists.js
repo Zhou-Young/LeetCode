@@ -68,7 +68,7 @@
 
 // };
 
-function(str){
+function mergeKLists(str){
   let arr;
   let currentIndex = 0,nextIndex = 0,sign=1;
   while(stack.length){
