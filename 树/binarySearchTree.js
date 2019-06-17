@@ -179,3 +179,4 @@ class BinaryTree {
 
 let nodes = [8, 3, 6, 4, 9, 11, 2, 5, 7];
 let binaryTree = new BinaryTree(nodes);
+binaryTree.showTree();
