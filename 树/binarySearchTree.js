@@ -91,6 +91,19 @@ class BinaryTree {
     };
     postOrderTraverseNode(this.root, fn);
   }
+  //层次遍历
+  levelTraverse() {
+    let queue = [];
+    queue.push(this.root);
+    console.log(this.root.key);
+    while (queue.length != 0) {
+      let node = queue.shift();
+      node.left != null && queue.push(node.left);
+      node.left != null && console.log(node.left.key);
+      node.right != null && queue.push(node.right);
+      node.right != null && console.log(node.right.key);
+    }
+  }
   // 最小值
   min() {
     let node = this.root;
@@ -180,3 +193,7 @@ class BinaryTree {
 let nodes = [8, 3, 6, 4, 9, 11, 2, 5, 7];
 let binaryTree = new BinaryTree(nodes);
 binaryTree.showTree();
+binaryTree.inOrderTraverse(v => {
+  console.log(v);
+});
+binaryTree.levelTraverse();
