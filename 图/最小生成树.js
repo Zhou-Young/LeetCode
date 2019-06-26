@@ -97,6 +97,31 @@ class Graph {
       this.marked[this.vertices[i]] = false;
     }
   }
+  // 判断两点是否连通
+  connected(graph, v, w) {
+    if (Object.keys(graph.adjList).length == 0) {
+      return false;
+    }
+    let marked = {};
+    for (let i = 0; i < graph.vertices.length; i++) {
+      marked[graph.vertices[i]] = false;
+    }
+    let dfs = (v, w) => {
+      if (v == w) {
+        return true;
+      }
+      marked[v] = true;
+      for (let i = 0; i < graph.adjList[v].length; i++) {
+        let a = marked;
+        if (marked[graph.adjList[v][i][1]] === false) {
+          let res = dfs(graph.adjList[v][i][1], w);
+          if (res === true) return true;
+        }
+      }
+      return false;
+    };
+    return dfs(v, w);
+  }
   // 最小生成树
   lazyPrimMST() {
     let marked = []; //最小生成树的顶点
@@ -133,24 +158,30 @@ class Graph {
     let marked = []; //最小生成树的顶点
     let mst = []; //最小生成树的边
     let pq = new MinPQ(); //横切边
+    let uf = new Graph();
     // 遍历并排序所有边
     for (let i = 0; i < this.edge.length; i++) {
       pq.add(this.edge[i]);
     }
-    //将最小的且不构成环的加入-------
+
+    //将最小的且不构成环的加入
     while (pq.item.length !== 0) {
-      if (!(marked.includes(pq.item[0][1]) && marked.includes(pq.item[0][0]))) {
-        mst.push(pq.item[0]);
-      }
       if (!marked.includes(pq.item[0][1])) {
         marked.push(pq.item[0][1]);
+        uf.addVertex(pq.item[0][1]);
       }
       if (!marked.includes(pq.item[0][0])) {
         marked.push(pq.item[0][0]);
+        uf.addVertex(pq.item[0][0]);
+      }
+      //判断是否连通
+      if (!this.connected(uf, pq.item[0][1], pq.item[0][0])) {
+        mst.push(pq.item[0]);
+        uf.addEdge(pq.item[0][0], pq.item[0][1], pq.item[0][2]);
       }
       pq.out();
     }
-    console.log(marked);
+    console.log(mst);
   }
 }
 
