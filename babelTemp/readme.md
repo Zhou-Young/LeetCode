@@ -1,0 +1,27 @@
+### .babelrc 配置说明
+
+- bable作用：
+  - 将高版本的语法转换为低版本（AST转换
+  - 语法转换只能转换写法，不能转换属性。需要用polyfill的方式实现新特性
+  - 源码转换（codemods
+- @babel/core、cli
+  - core是babel的核心库
+  - cli是提供babel这个命令
+  - 但是此时babel没有任何动作，需要插件让babel做实际工作
+- babel预设（preset
+  - 一组插件合集，将代码进行转换和polyfill
+  - 常用env  包括所有新特性（不包含stage提议阶段
+  - 如果不是要兼容浏览器和环境，指定目标环境可减少编译后代码体积
+- polyfill
+  - 让新的内置函数实例方法在低版本浏览器中使用
+  - 要用--save，polyfill的引入要在其他代码之前
+  - 配置env的useBuiltIns参数为usage时会去除多余polyfill，以减少代码体积且设置core.JS@3
+- @babel/plugin-transform-runtime
+  - 是一个可以重复使用 Babel 注入的帮助程序，以节省代码大小的插件。防止某些帮助函数重复存在于某些模块，于是集体引用
+  - 创建沙盒环境，防止polyfill污染全局
+  - 依赖于@babel/runtime。runtime会引入polyfill
+  - core-js2的情况下runtime只能实现全局方法，不包含实例方法，需要额外引入polyfill，corejs3则包含实例和全局方法，不需再引入polyfill
+- 插件和预设的执行顺序
+  - 插件在 Presets 前运行
+  - 插件顺序从前往后排列
+  - Preset 顺序是颠倒的（从后往前
